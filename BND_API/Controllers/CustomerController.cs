@@ -1,4 +1,5 @@
 ﻿using BND_API.Models;
+using BND_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,15 +9,30 @@ namespace BND_API.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpGet]
-        public Customer GetCustomerByID(Guid customerID)
+        private readonly CustomerService _customerService;
+
+        public CustomerController(CustomerService customerService)
         {
-            throw new NotImplementedException();
+            _customerService = customerService;
         }
 
+
+        [HttpGet]
+        public async Task<Customer> GetCustomerByID(Guid customerID)
+        {
+            return await _customerService.GetCustomerByID(customerID);
+        }
+
+        [HttpGet]
+        public async Task<Customer> GetCustomerByEmail(string email)
+        {
+            return await _customerService.GetCustomerByEmail(email);
+        }
+
+        [HttpPost]
         public Customer CreateCustomer(CreateCustomerRequest request)
         {
-            throw new NotImplementedException();
+            return _customerService.CreateCustomer(request);
         }
     }
 }

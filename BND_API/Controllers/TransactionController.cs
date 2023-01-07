@@ -1,4 +1,5 @@
 ﻿using BND_API.Models;
+using BND_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,29 @@ namespace BND_API.Controllers
     [ApiController]
     public class TransactionController : ControllerBase
     {
-        public Transaction MakeTransaction (CreateTransactionRequest request)
+        private readonly ITransactionService _transactionService;
+
+        public TransactionController(ITransactionService transactionService)
         {
-            throw new NotImplementedException();
+            _transactionService = transactionService;
+        }
+
+        [HttpPost]
+        public async Task<Transaction> MakeTransaction(CreateTransactionRequest request)
+        {
+            return await _transactionService.CreateTransaction(request);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Transaction>> GetTransactionsForAccountID(Guid accountID)
+        {
+            return await _transactionService.GetAllTransactionsForAccountID(accountID);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Transaction>> GetTransactionsForCustomerID(Guid customerID)
+        {
+            return await _transactionService.GetAllTransactionsForCustomerID(customerID);
         }
     }
 }

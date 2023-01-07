@@ -1,5 +1,5 @@
 ﻿using BND_API.Models;
-using Microsoft.AspNetCore.Http;
+using BND_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BND_API.Controllers
@@ -8,14 +8,29 @@ namespace BND_API.Controllers
     [ApiController]
     public class BankAccountController : ControllerBase
     {
-        public BankAccount CreateBankAccountForCustomer(CreateBankAccountRequest request)
+        private readonly BankAccountService _bankAccountService;
+
+        public BankAccountController(BankAccountService bankAccountService) 
         {
-            throw new NotImplementedException();
+            _bankAccountService = bankAccountService;
         }
 
-        public IEnumerable<BankAccount> GetBankAccountsForCustomer(Guid customerID)
+        [HttpGet]
+        public async Task<BankAccount> GetBankAccountByID(Guid accountID)
         {
-            throw new NotImplementedException();
+            return await _bankAccountService.GetBankAccountByID(accountID);
+        }
+
+        [HttpPost]
+        public async Task<BankAccount> CreateBankAccountForCustomer(CreateBankAccountRequest request)
+        {
+            return await _bankAccountService.CreateBankAccountForCustomer(request);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<BankAccount>> GetBankAccountsForCustomer(Guid customerID)
+        {
+            return await _bankAccountService.GetCustomerBankAccounts(customerID);
         }
     }
 }
