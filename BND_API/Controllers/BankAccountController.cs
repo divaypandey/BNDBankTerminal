@@ -12,5 +12,10 @@ namespace BND_API.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<BankAccount> GetBankAccountsForCustomer(Guid customerID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
