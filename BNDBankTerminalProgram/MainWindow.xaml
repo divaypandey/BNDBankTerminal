@@ -7,7 +7,37 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
     <StackPanel>
-        <Button IsEnabled="False" x:Name="ibanBtn" Click="Button_Click">get iban</Button>
-        <wv2:WebView2 Name="webView" Height="1" Source="http://randomiban.com/?country=Netherlands" />
+        <TextBlock FontSize="20px" FontFamily="Segoe UI" Margin="10px 10px 10px 5px">Welcome to BND Bank Terminal.</TextBlock>
+        <TextBlock Margin="10px 0px 0px 10px" Text="{Binding CurrentTime}"/>
+
+        <TextBlock Margin="10px 0px">
+            <Run Foreground="DarkCyan">ℹ</Run>
+            <Run>Make sure to verify the</Run>
+            <Run FontWeight="Bold">Customer Info</Run>
+            <Run>before proceeding</Run>
+        </TextBlock>
+
+        <Label Margin="5px 20px 0px 0px" FontWeight="DemiBold">Customers</Label>
+        <StackPanel Orientation="Horizontal">
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px" Click="NewCustomerClick">New Customer</Button>
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px">Deposit Money</Button>
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px">Customer Info</Button>
+        </StackPanel>
+        
+        <Label Margin="5px 20px 0px 0px" FontWeight="DemiBold">Bank Accounts</Label>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="10px 0px" BorderThickness="0px" Padding="5px 2px">New Bank Account</Button>
+            <Button Margin="10px 0px" BorderThickness="0px" Padding="5px 2px">Bank Account Info</Button>
+            <Button Margin="10px 0px" BorderThickness="0px" Padding="5px 2px">Bank Account(s) Info For Customer</Button>
+        </StackPanel>
+
+        <Label Margin="5px 20px 0px 0px" FontWeight="DemiBold">Transactions</Label>
+        <StackPanel Orientation="Horizontal">
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px">Transfer Money</Button>
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px">Transaction Info for Customer</Button>
+            <Button Background="#232323" BorderThickness="0px" Padding="5px 2px" Foreground="White" Margin="10px 0px">Transaction Info for Account</Button>
+        </StackPanel>
+
+        <wv2:WebView2 Name="webView" Visibility="Hidden" Height="1" Source="http://randomiban.com/?country=Netherlands" />
     </StackPanel>
 </Window>

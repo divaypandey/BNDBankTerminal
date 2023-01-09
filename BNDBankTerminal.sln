@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BND_API", "BND_API\BND_API.csproj", "{9F0CECAF-C6C3-48DB-ACE9-1ACE41F5C79C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BNDBankTerminalProgram", "BNDBankTerminalProgram\BNDBankTerminalProgram.csproj", "{3EE2B0EC-C33C-4F1D-95AE-01D07FD7C7D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BNDBankTerminalProgram", "BNDBankTerminalProgram\BNDBankTerminalProgram.csproj", "{3EE2B0EC-C33C-4F1D-95AE-01D07FD7C7D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BND_Core", "BND_Core\BND_Core.csproj", "{402983C4-DF1B-46AE-B058-60B9C87A3C68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3EE2B0EC-C33C-4F1D-95AE-01D07FD7C7D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE2B0EC-C33C-4F1D-95AE-01D07FD7C7D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE2B0EC-C33C-4F1D-95AE-01D07FD7C7D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402983C4-DF1B-46AE-B058-60B9C87A3C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402983C4-DF1B-46AE-B058-60B9C87A3C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402983C4-DF1B-46AE-B058-60B9C87A3C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402983C4-DF1B-46AE-B058-60B9C87A3C68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

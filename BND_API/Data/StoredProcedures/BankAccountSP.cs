@@ -1,4 +1,4 @@
-﻿using BND_API.Models;
+﻿using BND_Core.Models;
 using System.Data;
 
 namespace BND_API.Data.StoredProcedures

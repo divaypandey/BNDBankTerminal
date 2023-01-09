@@ -1,4 +1,4 @@
-﻿using BND_API.Models;
+﻿using BND_Core.Models;
 using BND_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
