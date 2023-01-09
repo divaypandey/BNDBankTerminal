@@ -8,14 +8,14 @@ namespace BND_API.Controllers
     [ApiController]
     public class BankAccountController : ControllerBase
     {
-        private readonly BankAccountService _bankAccountService;
+        private readonly IBankAccountService _bankAccountService;
 
-        public BankAccountController(BankAccountService bankAccountService) 
+        public BankAccountController(IBankAccountService bankAccountService) 
         {
             _bankAccountService = bankAccountService;
         }
 
-        [HttpGet]
+        [HttpGet("GetBankAccountByID/{accountID}")]
         public async Task<BankAccount> GetBankAccountByID(Guid accountID)
         {
             return await _bankAccountService.GetBankAccountByID(accountID);
@@ -27,7 +27,7 @@ namespace BND_API.Controllers
             return await _bankAccountService.CreateBankAccountForCustomer(request);
         }
 
-        [HttpGet]
+        [HttpGet("GetBankAccountsForCustomer/customerID")]
         public async Task<IEnumerable<BankAccount>> GetBankAccountsForCustomer(Guid customerID)
         {
             return await _bankAccountService.GetCustomerBankAccounts(customerID);

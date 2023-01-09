@@ -22,13 +22,13 @@ namespace BND_API.Controllers
             return await _transactionService.CreateTransaction(request);
         }
 
-        [HttpGet]
+        [HttpGet("GetTransactionsForAccountID/{accountID}")]
         public async Task<IEnumerable<Transaction>> GetTransactionsForAccountID(Guid accountID)
         {
             return await _transactionService.GetAllTransactionsForAccountID(accountID);
         }
 
-        [HttpGet]
+        [HttpGet("GetTransactionsForCustomerID/{customerID}")]
         public async Task<IEnumerable<Transaction>> GetTransactionsForCustomerID(Guid customerID)
         {
             return await _transactionService.GetAllTransactionsForCustomerID(customerID);

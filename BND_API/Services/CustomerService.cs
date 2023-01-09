@@ -13,32 +13,44 @@ namespace BND_API.Services
 
     public class CustomerService : ICustomerService
     {
-        private Customer dataSetToCustomerParser(DataSet result)
+        private Customer? DataSetToCustomerParser(DataSet result)
         {
-            Customer customer = new();
-            //parse dataset/datarow here
+            if (result is null) return null;
+
+            DataRow row = result.Tables[0].Rows[0];
+
+            Customer customer = new()
+            {
+                CustomerID = Guid.Parse(row["CustomerID"].ToString()),
+                FirstName = row["FirstName"].ToString(),
+                ContactNumber = row["ContactNumber"].ToString(),
+                PrimaryAddress = row["PrimaryAddress"].ToString(),
+                CitizenID = row["CitizenID"].ToString(),
+                Email = row["Email"].ToString()
+            };
+            if (!row.IsNull("LastName")) customer.LastName = row["LastName"].ToString();
+
             return customer;
         }
 
-
-
-
-        public Customer CreateCustomer(CreateCustomerRequest request)
+        public Customer? CreateCustomer(CreateCustomerRequest request)
         {
             request.Email = request.Email.Trim().ToLower();
             DataSet result = CustomerSP.CreateCustomer(request);
 
-            return dataSetToCustomerParser(result);
+            return DataSetToCustomerParser(result);
         }
 
-        public Task<Customer> GetCustomerByEmail(string email)
+        public async Task<Customer?> GetCustomerByEmail(string email)
         {
-            throw new NotImplementedException();
+            DataSet result = await CustomerSP.GetCustomerByEmail(email);
+            return DataSetToCustomerParser(result);
         }
 
-        public Task<Customer> GetCustomerByID(Guid customerID)
+        public async Task<Customer?> GetCustomerByID(Guid customerID)
         {
-            throw new NotImplementedException();
+            DataSet result = await CustomerSP.GetCustomerByID(customerID);
+            return DataSetToCustomerParser(result);
         }
     }
 }

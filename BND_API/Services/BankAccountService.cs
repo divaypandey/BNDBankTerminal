@@ -1,4 +1,6 @@
-﻿using BND_API.Models;
+﻿using BND_API.Data.StoredProcedures;
+using BND_API.Models;
+using System.Data;
 
 namespace BND_API.Services
 {
@@ -11,9 +13,28 @@ namespace BND_API.Services
 
     public class BankAccountService : IBankAccountService
     {
-        public Task<BankAccount> CreateBankAccountForCustomer(CreateBankAccountRequest request)
+        private BankAccount? DataSetToBankAccountParser(DataSet result)
         {
-            throw new NotImplementedException();
+            if (result is null) return null;
+
+            DataRow row = result.Tables[0].Rows[0];
+
+            BankAccount bankAccount = new()
+            {
+                AccountID = Guid.Parse(row["AccountID"].ToString()),
+                OwnerCustomerID = Guid.Parse(row["OwnerCustomerID"].ToString()),
+                Balance = decimal.Parse(row["Balance"].ToString()),
+                IBAN = row["IBAN"].ToString(),
+                CreatedAt = DateTime.Parse(row["CreatedAt"].ToString())
+            };
+
+            return bankAccount;
+        }
+
+        public async Task<BankAccount> CreateBankAccountForCustomer(CreateBankAccountRequest request)
+        {
+            var result = BankAccountSP.CreateBankAccount(request);
+            return DataSetToBankAccountParser(result);
         }
 
         public Task<BankAccount> GetBankAccountByID(Guid accountID)
