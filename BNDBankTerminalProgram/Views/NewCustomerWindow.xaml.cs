@@ -21,8 +21,10 @@ namespace BNDBankTerminalProgram.Views
     /// </summary>
     public partial class NewCustomerWindow : Window
     {
-        public bool Enabled { get; set; } = true;
         private CustomerService customerService = new();
+
+        public bool Enabled { get; set; } = true;
+        public Customer newCustomer { get; set; }
 
         private void ForceUIUpdate() //dirty way coz x:Bind not available before WinUI3/UWP
         {
@@ -52,7 +54,12 @@ namespace BNDBankTerminalProgram.Views
 
             var request = await customerService.CreateCustomer(customerRequest);
 
-            customerPW.IsOpen = true;
+            if(request != null)
+            {
+                newCustomer= request;
+                customerSnackbar.Visibility = Visibility.Visible;
+                ForceUIUpdate();
+            }
         }
     }
 }

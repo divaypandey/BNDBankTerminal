@@ -40,10 +40,12 @@
             <TextBox x:Name="citizenID" Margin="5px" MinWidth="300px" Grid.Row="5" Grid.Column="1" />
         </Grid>
         <Button IsEnabled="{Binding Enabled }" Click="NewCustomer_Click" Margin="300px 20px" BorderThickness="0">Create Customer</Button>
-        <Popup x:Name="customerPW" Placement="Mouse" AllowsTransparency="True" VerticalOffset="10">
-            <StackPanel>
-                <TextBlock Text="✅ The customer has been successfully created! You can close this window now." />
-            </StackPanel>
-        </Popup>
+        <StackPanel Margin="20" Visibility="Hidden" x:Name="customerSnackbar">
+            <TextBlock>
+                <Run Text="✅ The customer has been successfully created with ID:" />
+                <Run FontWeight="DemiBold" Text="{Binding newCustomer.CustomerID, Mode=TwoWay}" />                
+                <Run Text=" You can close this window now." />
+            </TextBlock>
+        </StackPanel>
     </StackPanel>
 </Window>

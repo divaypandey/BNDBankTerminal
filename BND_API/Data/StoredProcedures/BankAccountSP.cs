@@ -11,6 +11,13 @@ namespace BND_API.Data.StoredProcedures
             return new DataAccessHelper().HandleSQL($"INSERT INTO {TABLE_NAME} (AccountID, OwnerCustomerID, Balance, IBAN, CreatedAt) OUTPUT INSERTED.* VALUES (NEWID(), '{request.OwnerCustomerID}', 0, '{request.IBAN}', '{DateTime.UtcNow}')"); //sanitise?
         }
 
+        internal static DataSet DepositMoney(DepositMoneyRequest request)
+        {
+            var dataAccess = new DataAccessHelper();
+            dataAccess.HandleSQL($"UPDATE {TABLE_NAME} SET BALANCE = BALANCE + {request.ActualDepositAmount} WHERE AccountID = '{request.AccountID}'");
+            return dataAccess.HandleSQL($"SELECT * FROM {TABLE_NAME} WHERE AccountID = '{request.AccountID}'");
+        }
+
         internal static async Task<DataSet> GetBankAccountByID(Guid accountID)
         {
             return await new DataAccessHelper().HandleSQLAsync($"SELECT * FROM {TABLE_NAME} WHERE AccountID = '{accountID}'");

@@ -9,6 +9,7 @@ namespace BND_API.Services
         public Task<BankAccount> GetBankAccountByID(Guid accountID);
         public Task<IEnumerable<BankAccount>> GetCustomerBankAccounts(Guid customerID);
         public Task<BankAccount> CreateBankAccountForCustomer(CreateBankAccountRequest request);
+        public BankAccount DepositMoneyToAccount(DepositMoneyRequest request);
     }
 
     public class BankAccountService : IBankAccountService
@@ -37,14 +38,21 @@ namespace BND_API.Services
             return DataSetToBankAccountParser(result);
         }
 
-        public Task<BankAccount> GetBankAccountByID(Guid accountID)
+        public async Task<BankAccount> GetBankAccountByID(Guid accountID)
         {
-            throw new NotImplementedException();
+            var result = await BankAccountSP.GetBankAccountByID(accountID);
+            return DataSetToBankAccountParser(result);
         }
 
         public Task<IEnumerable<BankAccount>> GetCustomerBankAccounts(Guid customerID)
         {
             throw new NotImplementedException();
+        }
+
+        public BankAccount DepositMoneyToAccount(DepositMoneyRequest request)
+        {
+            var result = BankAccountSP.DepositMoney(request);
+            return DataSetToBankAccountParser(result);
         }
     }
 }

@@ -32,5 +32,11 @@ namespace BND_API.Controllers
         {
             return await _bankAccountService.GetCustomerBankAccounts(customerID);
         }
+
+        [HttpPost("DepositToAccount")]
+        public BankAccount DepositMoney(DepositMoneyRequest request)
+        {
+            return _bankAccountService.DepositMoneyToAccount(request);
+        }
     }
 }

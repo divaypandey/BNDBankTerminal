@@ -1,7 +1,7 @@
 ﻿using BND_Core.Models;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BNDBankTerminalProgram.Services
@@ -13,7 +13,7 @@ namespace BNDBankTerminalProgram.Services
             HttpClient client = new();
             var result = await client.PostAsync("http://localhost:5221/api/customer", JsonContent.Create(request));
             string json = await result.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Customer>(json);
+            return JsonConvert.DeserializeObject<Customer>(json);
         }
     }
 }

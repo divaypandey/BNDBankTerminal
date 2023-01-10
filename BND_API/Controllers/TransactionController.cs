@@ -16,12 +16,6 @@ namespace BND_API.Controllers
             _transactionService = transactionService;
         }
 
-        [HttpPost]
-        public async Task<Transaction> MakeTransaction(CreateTransactionRequest request)
-        {
-            return await _transactionService.CreateTransaction(request);
-        }
-
         [HttpGet("GetTransactionsForAccountID/{accountID}")]
         public async Task<IEnumerable<Transaction>> GetTransactionsForAccountID(Guid accountID)
         {
@@ -32,6 +26,12 @@ namespace BND_API.Controllers
         public async Task<IEnumerable<Transaction>> GetTransactionsForCustomerID(Guid customerID)
         {
             return await _transactionService.GetAllTransactionsForCustomerID(customerID);
+        }
+
+        [HttpPost("TransferMoney")]
+        public Transaction TransferMoney(CreateTransactionRequest request)
+        {
+            return _transactionService.TransferMoney(request);
         }
     }
 }

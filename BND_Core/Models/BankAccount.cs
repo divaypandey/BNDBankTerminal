@@ -12,4 +12,20 @@
         public decimal Balance { get; set; }
         public DateTime CreatedAt { get; set; }
     }
+
+    public record DepositMoneyRequest
+    {
+        private readonly static decimal ChargeFees = 0.1M;
+
+        public Guid AccountID { get; set; }
+        public decimal DepositAmount { get; set; }
+
+        public decimal ActualDepositAmount 
+        { 
+            get 
+            {
+                return Math.Max(0, DepositAmount * ChargeFees); 
+            } 
+        }
+    }
 }
