@@ -9,3 +9,4 @@ The program is divided into 3 main parts.
 
 The backend and the WPF reference the Core as a DLL, all made in .NET Core 6
 The API also has Swagger so feel free to use/test the endpoints in case the WPF has limitations
+PS: Ctrl + F5 starts both API and the WPF without debug, so needn't change startup prog (solution configured to have multiple)
