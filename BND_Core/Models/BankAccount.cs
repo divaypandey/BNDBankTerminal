@@ -15,7 +15,7 @@
 
     public record DepositMoneyRequest
     {
-        private readonly static decimal ChargeFees = 0.1M;
+        private readonly static decimal ChargeFees = 0.001M;
 
         public Guid AccountID { get; set; }
         public decimal DepositAmount { get; set; }
@@ -24,7 +24,7 @@
         { 
             get 
             {
-                return Math.Max(0, DepositAmount * ChargeFees); 
+                return Math.Max(0,(DepositAmount - (DepositAmount * ChargeFees))); 
             } 
         }
     }

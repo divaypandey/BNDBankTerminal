@@ -28,8 +28,8 @@
                 <Run FontWeight="DemiBold" Text="{Binding newAccount.AccountID, Mode=TwoWay}" />
                 <Run Text="and IBAN:" />
                 <Run FontWeight="DemiBold" Text="{Binding newAccount.IBAN, Mode=TwoWay}" />    
-                <Run Text=" You can close this window now." />
             </TextBlock>
+            <TextBlock Text="You can close this window now."/>
         </StackPanel>
     </StackPanel>
 

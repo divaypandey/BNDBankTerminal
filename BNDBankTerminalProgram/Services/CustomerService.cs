@@ -15,5 +15,13 @@ namespace BNDBankTerminalProgram.Services
             string json = await result.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<Customer>(json);
         }
+
+        public async Task<Customer> GetCustomerByEmail(string email)
+        {
+            HttpClient client = new();
+            var result = await client.GetAsync($"http://localhost:5221/api/customer/GetCustomerByEmail/{email.Trim().ToLower()}");
+            string json = await result.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Customer>(json);
+        }
     }
 }

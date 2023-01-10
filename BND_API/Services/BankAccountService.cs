@@ -17,9 +17,12 @@ namespace BND_API.Services
         private BankAccount? DataSetToBankAccountParser(DataSet result)
         {
             if (result is null) return null;
-
             DataRow row = result.Tables[0].Rows[0];
+            return DataRowToBankAccountParser(row);
+        }
 
+        private BankAccount? DataRowToBankAccountParser(DataRow row)
+        {
             BankAccount bankAccount = new()
             {
                 AccountID = Guid.Parse(row["AccountID"].ToString()),
@@ -44,9 +47,20 @@ namespace BND_API.Services
             return DataSetToBankAccountParser(result);
         }
 
-        public Task<IEnumerable<BankAccount>> GetCustomerBankAccounts(Guid customerID)
+        public async Task<IEnumerable<BankAccount>> GetCustomerBankAccounts(Guid customerID)
         {
-            throw new NotImplementedException();
+            List<BankAccount> bankAccounts = new();
+            var result = await BankAccountSP.GetBankAccountsByCustomerID(customerID);
+            foreach(DataRow row in result.Tables[0].Rows) 
+            {
+                try
+                {
+                    bankAccounts.Add(DataRowToBankAccountParser(row));
+                }
+                catch { }
+            }
+
+            return bankAccounts;
         }
 
         public BankAccount DepositMoneyToAccount(DepositMoneyRequest request)

@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BNDBankTerminalProgram.Views"
         mc:Ignorable="d"
-        Title="DepositMoneyWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Deposit Money | BND Bank" Height="450" Width="800">
+    <StackPanel Orientation="Vertical">
+        <Grid Margin="10px">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Margin="5px" Grid.Row="0" Grid.Column="0">Account ID</Label>
+            <TextBox x:Name="accountID" Margin="5px" MinWidth="300px" Grid.Row="0" Grid.Column="1" />
+            <Label Margin="5px" Grid.Row="1" Grid.Column="0">Amount</Label>
+            <TextBox x:Name="amount" Margin="5px" MinWidth="300px" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+        <TextBlock Margin="20,0" Text="ℹ Remember, if the AccountID is incorrect, the deposit will fail."/>
+        <Button IsEnabled="{Binding Enabled }" Click="Deposit_Click" Margin="300px 20px" BorderThickness="0">Deposit</Button>
+        <StackPanel Margin="20" Visibility="Hidden" x:Name="bankSnackbar">
+            <TextBlock>
+                <Run Text="✅ Money has been successfully deposited. New Balance:" /> 
+                <Run FontWeight="DemiBold" Text="{Binding account.Balance, Mode=TwoWay}" />
+            </TextBlock>
+            <TextBlock Text="You can close this window now."/>
+        </StackPanel>
+    </StackPanel>
 </Window>

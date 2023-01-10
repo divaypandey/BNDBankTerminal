@@ -31,6 +31,7 @@ namespace BND_API.Controllers
         [HttpPost("TransferMoney")]
         public Transaction TransferMoney(CreateTransactionRequest request)
         {
+            if (request.FromAccountID == request.ToAccountID) return null;
             return _transactionService.TransferMoney(request);
         }
     }

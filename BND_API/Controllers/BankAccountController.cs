@@ -27,7 +27,7 @@ namespace BND_API.Controllers
             return await _bankAccountService.CreateBankAccountForCustomer(request);
         }
 
-        [HttpGet("GetBankAccountsForCustomer/customerID")]
+        [HttpGet("GetBankAccountsForCustomer/{customerID}")]
         public async Task<IEnumerable<BankAccount>> GetBankAccountsForCustomer(Guid customerID)
         {
             return await _bankAccountService.GetCustomerBankAccounts(customerID);

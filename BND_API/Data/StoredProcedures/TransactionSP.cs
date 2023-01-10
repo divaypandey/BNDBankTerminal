@@ -26,11 +26,11 @@ IF(@FROMBAL >= {amount})
 	BEGIN
 		UPDATE BankAccountsTable SET Balance = (Balance - {amount}) WHERE AccountID = '{request.FromAccountID}';
 		UPDATE BankAccountsTable SET Balance = (Balance + {amount}) WHERE AccountID = '{request.ToAccountID}';
-        INSERT INTO {TABLE_NAME} OUTPUT INSERTED.* (TransactionID, AttemptedOn, FromAccountID, ToAccountID, Amount, WasSuccessful) VALUES (NEWID(), '{DateTime.UtcNow}', '{request.FromAccountID}', '{request.ToAccountID}', {amount}, 1);
+        INSERT INTO {TABLE_NAME} (TransactionID, AttemptedOn, FromAccountID, ToAccountID, Amount, WasSuccessful) OUTPUT INSERTED.* VALUES (NEWID(), '{DateTime.UtcNow}', '{request.FromAccountID}', '{request.ToAccountID}', {amount}, 1);
 	END
 ELSE 
     BEGIN
-        INSERT INTO {TABLE_NAME} OUTPUT INSERTED.* (TransactionID, AttemptedOn, FromAccountID, ToAccountID, Amount, WasSuccessful) VALUES (NEWID(), '{DateTime.UtcNow}', '{request.FromAccountID}', '{request.ToAccountID}', {amount}, 0);
+        INSERT INTO {TABLE_NAME} (TransactionID, AttemptedOn, FromAccountID, ToAccountID, Amount, WasSuccessful)  OUTPUT INSERTED.* VALUES (NEWID(), '{DateTime.UtcNow}', '{request.FromAccountID}', '{request.ToAccountID}', {amount}, 0);
     END");
         }
     }
